@@ -3,9 +3,9 @@
 (hearable_service_view.dartはデバック用で使用していません。)  
 ゲームの遷移は以下のようになっています。  
  ┌─────────────→start.dart←───→how_to_play.dart  
- │<code>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</code>┌──────────┴────────┐  
+ │<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>┌──────────┴────────┐  
  │ normal_mode.dart     hard_mode.dart  ─────────→ nine_axis_sensor.dart  
- │<code>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</code>└──────────┬────────┘<code>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</code>(センサ値の取得など)  
+ │<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>└──────────┬────────┘<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>(センサ値の取得など)  
  └─────────────result.dart  
 
 # ヒアラブルデバイス(RN002)のサンプルアプリについて
