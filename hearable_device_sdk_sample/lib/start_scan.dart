@@ -3,9 +3,12 @@ import 'package:hearable_device_sdk_sample/ear_acoustic_reg.dart';
 import 'package:hearable_device_sdk_sample/ear_acoustic_test.dart';
 import 'package:hearable_device_sdk_sample/ear_acoustic_del.dart';
 import 'package:hearable_device_sdk_sample/start.dart';
+import 'package:hearable_device_sdk_sample/random_walk.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
+import 'package:hearable_device_sdk_sample/hearable_service_view.dart';
 import 'package:hearable_device_sdk_sample/size_config.dart';
+import 'package:hearable_device_sdk_sample/check.dart';
 import 'package:hearable_device_sdk_sample/widgets.dart';
 import 'package:hearable_device_sdk_sample/alert.dart';
 import 'package:hearable_device_sdk_sample/bluetooth_manager.dart';
@@ -153,6 +156,90 @@ class _StartScanState extends State<_StartScan> {
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
                         return Start();
+                      },
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        const Offset begin = Offset(1.0, 0.0); // 右から左
+                        // final Offset begin = Offset(-1.0, 0.0); // 左から右
+                        const Offset end = Offset.zero;
+                        final Animatable<Offset> tween =
+                            Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: Curves.easeInOut));
+                        final Animation<Offset> offsetAnimation =
+                            animation.drive(tween);
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                    ));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.train),
+              title: const Text(('ランダムウォーク')),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return MyApp();
+                      },
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        const Offset begin = Offset(1.0, 0.0); // 右から左
+                        // final Offset begin = Offset(-1.0, 0.0); // 左から右
+                        const Offset end = Offset.zero;
+                        final Animatable<Offset> tween =
+                            Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: Curves.easeInOut));
+                        final Animation<Offset> offsetAnimation =
+                            animation.drive(tween);
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                    ));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.train),
+              title: const Text(('センサデータ確認')),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return HearableServiceView();
+                      },
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        const Offset begin = Offset(1.0, 0.0); // 右から左
+                        // final Offset begin = Offset(-1.0, 0.0); // 左から右
+                        const Offset end = Offset.zero;
+                        final Animatable<Offset> tween =
+                            Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: Curves.easeInOut));
+                        final Animation<Offset> offsetAnimation =
+                            animation.drive(tween);
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                    ));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.train),
+              title: const Text(('テスト')),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return NineSensors();
                       },
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {

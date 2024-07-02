@@ -1,15 +1,4 @@
-// テストにのみ使用
-// ゲーム自体はstart.dart - how_to_play.dart
-//                |
-//                ├ normal_mode.dart ┐
-//                └ hard_mode.dart   ┤
-//                                   └ result.dart
-
 import 'package:flutter/material.dart';
-import 'package:hearable_device_sdk_sample/how_to_play.dart';
-import 'package:hearable_device_sdk_sample/result.dart';
-import 'package:hearable_device_sdk_sample/start.dart';
-import 'package:hearable_device_sdk_sample/normal_mode.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 
@@ -426,58 +415,21 @@ class _HearableServiceViewState extends State<_HearableServiceView> {
     }
 
     return Scaffold(
-      // 大元のキャンパス
       appBar: AppBar(
-        // 上のヘッダー
         title: const Text('センサデータ確認', style: TextStyle(fontSize: 16)),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
       body: GestureDetector(
-        // スクロール可能なボディ
         behavior: HitTestBehavior.opaque,
-        onTap: () => {
-          _saveInput(context)
-        }, // このウィジェット(ほぼ全体)をタッチしたとき行う。setStateがあるため、他dartからの値の更新を行う。
+        onTap: () => {_saveInput(context)},
         child: SingleChildScrollView(
-          // スクロール可能なウィジェット
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 10), // 下に空白
+            padding: const EdgeInsets.only(bottom: 10),
             child: Column(
-              // 列表示
-              mainAxisAlignment: MainAxisAlignment.start, // 並べ方(上詰め)
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Normal_mode()));
-                  },
-                  child: Text('Normal Modeへ'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HowToPlay()));
-                  },
-                  child: Text('How to Playへ'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Start()));
-                  },
-                  child: Text('Startへ'),
-                ),
-
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Result(100)));
-                  },
-                  child: Text('Resultへ'),
-                ),
-
                 const SizedBox(height: 10),
                 const Text('確認したいデータをOnにしてください',
                     style:
@@ -487,24 +439,18 @@ class _HearableServiceViewState extends State<_HearableServiceView> {
                   height: 20,
                 ),
                 Consumer<NineAxisSensor>(
-                    // 動的なウィジェットを作るのに必要
                     builder: ((context, nineAxisSensor, _) =>
                         Widgets.switchContainer(
-                            // widgets.dart内のswitchContainer関数でスイッチの外形とスイッチの状態、関数を指定している
                             title: '9軸センサ',
                             enable: nineAxisSensor.isEnabled,
-                            function:
-                                _switch9AxisSensor))), // _switch9AxisSensorは引数のenable(ここではfuncitonから渡される)によってセンサの取得開始、終了を調整、またsetStateがあるためセンサ値が変化
+                            function: _switch9AxisSensor))),
                 const SizedBox(height: 10),
                 Consumer<NineAxisSensor>(
                     builder: ((context, nineAxisSensor, _) =>
                         Widgets.resultContainer(
-                            // widgets.dartで定義されているコンテナのフォーマット(resultContainer{NONE,2})を用いる
                             verticalRatio: 40,
                             controller: nineAxisSensorResultController,
-                            // text: nineAxisSensor.getResultString()))),
-                            text:
-                                nineAxisSensor.getAccelerationX().toString()))),
+                            text: nineAxisSensor.getResultString()))),
                 const SizedBox(height: 20),
                 // 温度
                 Consumer<Temperature>(
